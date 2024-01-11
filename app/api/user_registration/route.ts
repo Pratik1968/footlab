@@ -1,5 +1,5 @@
 import {Pool} from "pg";
-// import db from "../_util/db";
+import db from "../_util/db";
 export async function POST(request:Request){
 let RequestData = await request.json()
 console.log("check")
@@ -25,15 +25,3 @@ return responese
 
 }
 
-
-function db(){
-  return(
-  new Pool({
-         user: process.env.DB_USER,
-         host:process.env.DB_HOST,
-         database:process.env.DB,
-         password:process.env.DB_PASSWORD,
-         port:parseInt(process.env.DB_PORT!),
-       }) 
-  )   
- } 
