@@ -28,5 +28,5 @@ Welcome to the Online Shoe Store project! This web application allows users to b
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Pratik1968/footlab.git)https://github.com/Pratik1968/footlab.git
+   git clone https://github.com/Pratik1968/footlab.git
 
