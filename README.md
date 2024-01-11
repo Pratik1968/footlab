@@ -1,4 +1,4 @@
-<span style="color:red">Under Development</span>
+**Under Development**
 
 # Footlab :  Online Shoe Store
 
