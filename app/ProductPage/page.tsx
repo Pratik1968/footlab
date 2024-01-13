@@ -20,7 +20,7 @@ if(productId===null||productId==="") throw "Error : add productId"
 fetch(`api/get_product_info?productId=${productId}`).then(res=>res.json()).then(res=>{setProductInfo(res)})
 },[])
     return(
-        <div className=" flex flex-col ">
+        <div className="h-full flex flex-col ">
  <Navigation CatergoriesListShow={false}/>
  <ProductPageContent productInfo={productInfo} sizeActive = {sizeActive} alertBox={alertBox} productId={productId} setAlertBox={setAlertBox} setSizeActive={setSizeActive}/>
  <PageFooter/>
@@ -31,7 +31,7 @@ fetch(`api/get_product_info?productId=${productId}`).then(res=>res.json()).then(
 
 function ProductPageContent({productInfo,sizeActive,alertBox,productId,setAlertBox,setSizeActive}:{productInfo?:ProductInfo,sizeActive:number,alertBox:boolean,productId:string|null,setSizeActive:Function,setAlertBox:Function}):ReactNode{
     return(
-<div className="flex flex-col lg:flex-row mb-5">
+<div className="lg:w-[80%] lg:self-center    flex flex-col lg:flex-row mb-5">
 <div className=" flex flex-col ">
     <ProductImage src={`/images/image_id=${productInfo?.productid}.png`}/>
         <SmallProductImages src={[`/images/image_id=${productInfo?.productid}.png`]}/>
