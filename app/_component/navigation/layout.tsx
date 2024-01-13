@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { ReactNode, useState } from "react";
-
 export default function Navigation({CatergoriesListShow=true}:{CatergoriesListShow?:boolean}):ReactNode{
     const [menuShow,setMenuShow] = useState(false);
     return(
