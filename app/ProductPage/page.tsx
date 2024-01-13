@@ -20,26 +20,41 @@ if(productId===null||productId==="") throw "Error : add productId"
 fetch(`api/get_product_info?productId=${productId}`).then(res=>res.json()).then(res=>{setProductInfo(res)})
 },[])
     return(
-        <div className=" flex flex-col">
+        <div className="h-full flex flex-col ">
  <Navigation CatergoriesListShow={false}/>
- <ProductImage src={`/images/image_id=${productInfo?.productid}.png`}/>
-<SmallProductImages src={[`/images/image_id=${productInfo?.productid}.png`]}/>
-<Rating rating={productInfo?.productrating} RatingClassname="ml-[10%] mt-9 " Size="1.5rem"/>
-<Title text={productInfo?.name} className="mt-3"/>
- <Discription size={productInfo?.size} brand={productInfo?.brand} catergory={productInfo?.catergory} name={productInfo?.name} color={productInfo?.color} quantity={productInfo?.stockquantity} releaseDate={productInfo?.releasedate} rating={productInfo?.productrating} price={productInfo?.price}/> 
-<SizeComponent sizeActive={sizeActive} setSizeActive={setSizeActive} size={productInfo?.size}/>
-<PriceText text={productInfo?.price}/>
-
-<AddCartButton  productId={productId}  size={productInfo?.size} sizeActive={sizeActive}  setAlertBox = {setAlertBox}/>
-{
-  alertBox && <AlertBox title="Cart" discription="Shoe added to you cart."/>
-}
-<div className="h-10"></div>
-<PageFooter/>
+ <ProductPageContent productInfo={productInfo} sizeActive = {sizeActive} alertBox={alertBox} productId={productId} setAlertBox={setAlertBox} setSizeActive={setSizeActive}/>
+ <PageFooter/>
 
 </div>
     )
 }
+
+function ProductPageContent({productInfo,sizeActive,alertBox,productId,setAlertBox,setSizeActive}:{productInfo?:ProductInfo,sizeActive:number,alertBox:boolean,productId:string|null,setSizeActive:Function,setAlertBox:Function}):ReactNode{
+    return(
+<div className="lg:w-[80%] lg:self-center    flex flex-col lg:flex-row mb-5">
+<div className=" flex flex-col ">
+    <ProductImage src={`/images/image_id=${productInfo?.productid}.png`}/>
+        <SmallProductImages src={[`/images/image_id=${productInfo?.productid}.png`]}/>
+</div>
+<div className="flex flex-col lg: gap-5">
+    <Rating rating={productInfo?.productrating} RatingClassname="ml-[10%] mt-9 " Size="1.5rem"/>
+    <Title text={productInfo?.name} className="mt-3"/>
+     <Discription size={productInfo?.size} brand={productInfo?.brand} catergory={productInfo?.catergory} name={productInfo?.name} color={productInfo?.color} quantity={productInfo?.stockquantity} releaseDate={productInfo?.releasedate} rating={productInfo?.productrating} price={productInfo?.price}/>
+    <SizeComponent sizeActive={sizeActive} setSizeActive={setSizeActive} size={productInfo?.size}/>
+    <PriceText text={productInfo?.price}/>
+<AddCartButton  productId={productId}  size={productInfo?.size} sizeActive={sizeActive}  setAlertBox = {setAlertBox}/>
+</div>
+
+{
+  alertBox && <AlertBox title="Cart" discription="Shoe added to you cart."/>
+}
+<div className="h-10"></div>
+
+</div>
+
+    )
+}
+
 
 function ProductImage({src}:{src:string}):ReactNode{
     return(
@@ -84,7 +99,7 @@ function SizeComponent({sizeActive,setSizeActive,size=[]}:{sizeActive:number,set
     const SizeContainer  = ({IndividualSize,id}:{IndividualSize:number,id:number})=>{    //   console.log(`${id} ${sizeActive}`)
     
     return(
-<div onClick={()=>setSizeActive(id)} className={`w-[1.875rem] h-[1.875rem] flex items-center justify-center rounded-full bg-[#D9D9D9] ${(sizeActive===id)?"border-black border-2" :""} `}>
+<div onClick={()=>setSizeActive(id)} className={`w-[1.875rem] h-[1.875rem] flex items-center justify-center rounded-full bg-[#D9D9D9] cursor-pointer ${(sizeActive===id)?"border-black border-2" :""} `}>
     <p  className={`${sizeActive===id?"font-bold":""}`} >{IndividualSize}</p>
 </div>
         )

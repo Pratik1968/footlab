@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { ReactNode, useState } from "react";
-
 export default function Navigation({CatergoriesListShow=true}:{CatergoriesListShow?:boolean}):ReactNode{
     const [menuShow,setMenuShow] = useState(false);
     return(
@@ -21,7 +20,7 @@ export default function Navigation({CatergoriesListShow=true}:{CatergoriesListSh
 
 function CatergoiesListAndOption({CatergoriesListShow}:{CatergoriesListShow?:boolean}):ReactNode{
     const IconGroup =({Icon1,Icon2}:{Icon1:string,Icon2:string}):ReactNode=>{
-    return    <div className="hidden lg:flex   gap-3">
+    return    <div className="hidden lg:flex   gap-3 ">
         <span className="material-symbols-outlined justify-self-end font-bold cursor-pointer" >
 {Icon1}
 </span>
@@ -31,7 +30,7 @@ function CatergoiesListAndOption({CatergoriesListShow}:{CatergoriesListShow?:boo
         </div>
     }
     return(
-<div className="flex  lg:w-[80%] lg:self-center">
+<div className="flex  lg:w-[80%] lg:self-center lg:justify-between">
 <IconGroup Icon1="person" Icon2="logout"/>
 {
   (CatergoriesListShow)? <CatergoriesList/> :""  
