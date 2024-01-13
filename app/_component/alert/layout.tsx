@@ -1,5 +1,5 @@
 
-import { RocketIcon, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 export default function AlertBox({title,discription}:{title:string,discription:string}) {
     return (
       <div className=" fixed bottom-[0px] flex  bg-white w-full gap-3 p-5 shadow">
