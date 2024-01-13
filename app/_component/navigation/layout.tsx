@@ -19,24 +19,25 @@ export default function Navigation({CatergoriesListShow=true}:{CatergoriesListSh
 }
 
 function CatergoiesListAndOption({CatergoriesListShow}:{CatergoriesListShow?:boolean}):ReactNode{
-    const IconGroup =({Icon1,Icon2}:{Icon1:string,Icon2:string}):ReactNode=>{
+    const IconGroup =({Icon1,Icon2,onClick1,onClick2}:{Icon1:string,Icon2:string,onClick1:Function,onClick2:Function}):ReactNode=>{
     return    <div className="hidden lg:flex   gap-3 ">
-        <span className="material-symbols-outlined justify-self-end font-bold cursor-pointer" >
+        <span className="material-symbols-outlined justify-self-end font-bold cursor-pointer" onClick={()=>onClick1()}>
 {Icon1}
 </span>
-<span className="material-symbols-outlined justify-self-end font-bold cursor-pointer" >
+<span className="material-symbols-outlined justify-self-end font-bold cursor-pointer" onClick={()=>onClick2}>
 {Icon2}
 </span>
         </div>
     }
+    const router = useRouter()
     return(
 <div className="flex  lg:w-[80%] lg:self-center lg:justify-between">
-<IconGroup Icon1="person" Icon2="logout"/>
+<IconGroup Icon1="person" Icon2="logout" onClick1={()=>{}} onClick2={()=>{}}/>
 {
   (CatergoriesListShow)? <CatergoriesList/> :""  
 }
 
-<IconGroup Icon1="shopping_cart" Icon2="search"/>
+<IconGroup Icon1="shopping_cart" Icon2="search" onClick1={()=>{router.push("/Carts")}} onClick2={()=>{}}/>
 
 </div>
     )

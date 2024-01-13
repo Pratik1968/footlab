@@ -26,7 +26,7 @@ export default function Carts():ReactNode{
         },
         body:JSON.stringify({email:email})
 
-    }).then(res=>res.json()).then((res=>{setProducts(res);console.log(res)}))
+    }).then(res=>res.json()).then((res=>{setProducts(res);}))
    
 },[])
    return(
