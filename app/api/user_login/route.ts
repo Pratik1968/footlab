@@ -1,3 +1,4 @@
+import { error } from "console"
 import { Pool } from "pg"
 import db from "../_util/db"
 

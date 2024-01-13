@@ -8,6 +8,7 @@ import illustration1 from "../assets/girl-shopping-illustration.svg";
 import illustration2 from "../assets/ladding-waiting-illustration.svg";
 import illustration3 from "../assets/lady-choosing-illustration.svg";
 import illustration4 from "../assets/lady-shopping-online-illustration.svg";
+import { BrowserView } from "react-device-detect";
 import errorCode from "../Error/errorCode";
 import { useRouter } from "next/navigation";
 export default function SignUp():ReactNode{
@@ -52,7 +53,7 @@ function SignUpContainer({signInButtonPressed,setSignInButtonPressed, name,passw
 function Title({text}:{text:string}):ReactNode{
     return(
         <div className="w-full flex items-center justify-center mt-14 lg:mt-8">
-            <p className="text-3xl font-bold text-primary">{text}</p>
+            <p className="text-3xl font-bold ">{text}</p>
         </div>
     )
 }
