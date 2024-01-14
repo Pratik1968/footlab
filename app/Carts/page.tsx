@@ -36,7 +36,7 @@ export default function Carts(): ReactNode {
             <Navigation CatergoriesListShow={false} />
             <div className="h-5"></div>
 <CartsPageContent products={products} setProducts={setProducts}/>
-<PayButton/>
+<BuyButton/>
         </div>
     )
 }
@@ -111,8 +111,9 @@ function Title({value}:{value:string}) {
 
 }
 
-function PayButton():ReactNode {
+function BuyButton():ReactNode {
+    const router= useRouter()
     return(
-<div className="fixed bottom-5 left-0 right-0 flex items-center justify-center"><button className="w-[75%] lg:w-[15%] bg-primary py-4  text-secondary font-bold rounded-xl" onClick={()=>}>Buy</button></div>
+<div className="fixed bottom-5 left-0 right-0 flex items-center justify-center"><button className="w-[75%] lg:w-[15%] bg-primary py-4  text-secondary font-bold rounded-xl" onClick={()=>router.push("/addAddresses")}>Buy</button></div>
         )
 }
