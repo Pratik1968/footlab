@@ -1,5 +1,11 @@
 import { Pool, Query, QueryResult } from "pg"
 import db from "../_util/db"
+interface cartInfo {
+  size: number;
+  productid: number;
+  name: string;
+  price: string;
+}
 export async function POST(request:Request){
    const RequestData = await request.json()
    let email = RequestData.email
@@ -23,8 +29,7 @@ async function DB(email:string,index:number){
   ,shoeproduct.name ,shoeproduct.price  FROM carts, jsonb_path_query(productids, '$[*]') AS element
   JOIN shoeproduct ON shoeproduct.productid = (element->> 'productId')::int  
   WHERE email='${email}';`
-  let Response:QueryResult[] =  await conn.query(query)
-  console.log(Response[1].rows[0]?Response[1].rows[0].productids:[])
+  const  Response:any=  await conn.query(query)
   return Response[1].rows
 
 }

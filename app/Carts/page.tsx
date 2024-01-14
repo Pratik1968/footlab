@@ -32,18 +32,18 @@ export default function Carts(): ReactNode {
 
     }, [])
     return (
-        <div className="flex flex-col">
+        <div className="w-full h-full flex flex-col">
             <Navigation CatergoriesListShow={false} />
             <div className="h-5"></div>
 <CartsPageContent products={products} setProducts={setProducts}/>
-<BuyButton/>
+<BuyButton products={products}/>
         </div>
     )
 }
 
 function CartsPageContent({ products,setProducts }: { products: cartInfo[],setProducts:Function }):ReactNode {
     return(
-        <div className="self-center lg:w-[80%] flex flex-col">
+        <div className="h-full self-center lg:w-[80%] flex flex-col">
             <Title value="Carts"/>
             <div className="h-5"></div>
             <CartsList products={products} setProducts={setProducts}/>
@@ -74,10 +74,10 @@ function CartCards({ info, index, setProducts }: { info: cartInfo, index: number
    const router = useRouter()
     return (
 
-        <div className="p-2 cursor-pointer" onClick={()=>router.push(`/ProductPage?productId=${info.productid}`)    }>
-            <div className="w-full grid grid-cols-[1fr_2fr_1fr] gap-x-3 my-2">
-                <div className="w-[7.89rem] h-[6.7rem] p-5 bg-card_background rounded-xl flex items-center justify-center"><img src={`/images/image_id=${info.productid}.png`} className="w-fit h-fit " alt={`${info.productid}`} /></div>
-                <div className="flex flex-col justify-center">
+        <div className="p-2 cursor-pointer" >
+            <div className="w-full grid grid-cols-[1fr_2fr_1fr] gap-x-3 my-2" >
+                <div className="w-[7.89rem] h-[6.7rem] p-5 bg-card_background rounded-xl flex items-center justify-center" onClick={()=>router.push(`/ProductPage?productId=${info.productid}`)    }><img src={`/images/image_id=${info.productid}.png`} className="w-fit h-fit " alt={`${info.productid}`} /></div>
+                <div className="flex flex-col justify-center" onClick={()=>router.push(`/ProductPage?productId=${info.productid}`)    }>
                     <p className="font-medium">{info.name}</p>
                     <p><span className="font-medium">Size</span>: {info.size}</p>
                     <p><span className="font-medium">Price</span>: ₹{info.price}</p>
@@ -111,8 +111,9 @@ function Title({value}:{value:string}) {
 
 }
 
-function BuyButton():ReactNode {
+function BuyButton({products}:{products:cartInfo[]}):ReactNode {
     const router= useRouter()
+    if(products.length ===0) return
     return(
 <div className="fixed bottom-5 left-0 right-0 flex items-center justify-center"><button className="w-[75%] lg:w-[15%] bg-primary py-4  text-secondary font-bold rounded-xl" onClick={()=>router.push("/addAddresses")}>Buy</button></div>
         )
