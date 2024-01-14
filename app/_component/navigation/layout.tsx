@@ -37,7 +37,7 @@ function CatergoiesListAndOption({CatergoriesListShow}:{CatergoriesListShow?:boo
     }
     return(
 <div className="flex  lg:w-[80%] lg:self-center lg:justify-between">
-<IconGroup Icon1="shopping_bag" Icon2="logout" onClick1={()=>{}} onClick2={()=>logout()}/>
+<IconGroup Icon1="shopping_bag" Icon2="logout" onClick1={()=>router.push("/MyOrders")} onClick2={()=>logout()}/>
 {
   (CatergoriesListShow)? <CatergoriesList/> :""  
 }
