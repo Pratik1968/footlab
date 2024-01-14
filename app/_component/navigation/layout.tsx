@@ -24,15 +24,20 @@ function CatergoiesListAndOption({CatergoriesListShow}:{CatergoriesListShow?:boo
         <span className="material-symbols-outlined justify-self-end font-bold cursor-pointer" onClick={()=>onClick1()}>
 {Icon1}
 </span>
-<span className="material-symbols-outlined justify-self-end font-bold cursor-pointer" onClick={()=>onClick2}>
+<span className="material-symbols-outlined justify-self-end font-bold cursor-pointer" onClick={()=>onClick2()}>
 {Icon2}
 </span>
         </div>
     }
     const router = useRouter()
+    const logout = ()=>{
+        console.log("logout")
+        sessionStorage.clear()
+        router.push("/login")
+    }
     return(
 <div className="flex  lg:w-[80%] lg:self-center lg:justify-between">
-<IconGroup Icon1="person" Icon2="logout" onClick1={()=>{}} onClick2={()=>{}}/>
+<IconGroup Icon1="shopping_bag" Icon2="logout" onClick1={()=>{}} onClick2={()=>logout()}/>
 {
   (CatergoriesListShow)? <CatergoriesList/> :""  
 }
@@ -79,21 +84,26 @@ const router = useRouter()
 )
 }
 function NavList({menuShow}:{menuShow:boolean}):ReactNode{
-const NavItem = ({Icon,title}:{Icon:string,title:string})=>{
     const router = useRouter()
- return <div className="flex gap-5 cursor-pointer" onClick={()=>router.push("/Carts")}>
+
+    const NavItem = ({Icon,title,onClick}:{Icon:string,title:string,onClick:Function})=>{
+ return <div className="flex gap-5 cursor-pointer" onClick={()=>onClick()}>
         <span className="material-symbols-outlined justify-self-end font-bold" >
 {Icon}
 </span>
 <p className="font-semibold tracking-wider">{title}</p>
 </div>
 }
+const logout = ()=>{
+    sessionStorage.clear()
+    router.push("/login")
+}
 return(
 <div className={`w-full h-fit flex items-center justify-center transition-all duration-200 mb-6 ${menuShow?"opacity-100 block ":"opacity-0 hidden "}`}>
 <div className={`flex flex-col gap-3 animate-fade-in   `}>
-    <NavItem Icon="person" title="Account"/>
-    <NavItem Icon="shopping_cart" title="Carts"/>
-    <NavItem Icon="logout" title="Logout"/>
+    <NavItem Icon="shopping_bag" title="My Orders" onClick={()=>router.push("/MyOrders")}/>
+    <NavItem Icon="shopping_cart" title="Carts" onClick={()=>router.push("/Carts")}/>
+    <NavItem Icon="logout" title="Logout" onClick={()=>logout()}/>
 </div>
 
 </div>
