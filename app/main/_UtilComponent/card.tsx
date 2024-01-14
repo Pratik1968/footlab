@@ -9,7 +9,6 @@ export default function Card({productId,className,ImageClassName="",TitleClassna
 const [isClicked,setIsClick] = useState(false)
    
             const handleClick=()=>{
-                console.log("Test 1")
                     router.push(`/ProductPage?productId=${productId}`)
             }
     
