@@ -1,16 +1,16 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { ReactNode, useState } from "react";
-export default function Navigation({CatergoriesListShow=true}:{CatergoriesListShow?:boolean}):ReactNode{
+export default function Navigation({CatergoriesListShow=true,SearchShow=true}:{CatergoriesListShow?:boolean,SearchShow?:boolean}):ReactNode{
     const [menuShow,setMenuShow] = useState(false);
     return(
         <>
         <div className=" w-full flex pt-10 pb-4 px-5 items-center ">
 <Menu setMenuShow={setMenuShow} menuShow={menuShow} className="self-center lg:hidden"/>
 <Title/>  
-<Search className="self-center lg:hidden"/>
+{SearchShow && <Search className="self-center lg:hidden"/>}
         </div>
-<CatergoiesListAndOption CatergoriesListShow={CatergoriesListShow}/>
+<CatergoiesListAndOption CatergoriesListShow={CatergoriesListShow} SearchShow ={SearchShow}/> 
 
 <NavList menuShow = {menuShow}/>        
 
@@ -18,15 +18,15 @@ export default function Navigation({CatergoriesListShow=true}:{CatergoriesListSh
     )
 }
 
-function CatergoiesListAndOption({CatergoriesListShow}:{CatergoriesListShow?:boolean}):ReactNode{
-    const IconGroup =({Icon1,Icon2,onClick1,onClick2}:{Icon1:string,Icon2:string,onClick1:Function,onClick2:Function}):ReactNode=>{
+function CatergoiesListAndOption({CatergoriesListShow,SearchShow}:{CatergoriesListShow?:boolean,SearchShow:boolean}):ReactNode{
+    const IconGroup =({Icon1,Icon2,onClick1,onClick2,Icon2Show=true}:{Icon1:string,Icon2:string,onClick1:Function,onClick2:Function,Icon2Show?:boolean}):ReactNode=>{
     return    <div className="hidden lg:flex   gap-3 ">
         <span className="material-symbols-outlined justify-self-end font-bold cursor-pointer" onClick={()=>onClick1()}>
 {Icon1}
 </span>
-<span className="material-symbols-outlined justify-self-end font-bold cursor-pointer" onClick={()=>onClick2()}>
+{Icon2Show && <span className="material-symbols-outlined justify-self-end font-bold cursor-pointer" onClick={()=>onClick2()}>
 {Icon2}
-</span>
+</span>}
         </div>
     }
     const router = useRouter()
@@ -39,17 +39,18 @@ function CatergoiesListAndOption({CatergoriesListShow}:{CatergoriesListShow?:boo
 <div className="flex  lg:w-[80%] lg:self-center lg:justify-between">
 <IconGroup Icon1="shopping_bag" Icon2="logout" onClick1={()=>router.push("/MyOrders")} onClick2={()=>logout()}/>
 {
-  (CatergoriesListShow)? <CatergoriesList/> :""  
+  CatergoriesListShow && <CatergoriesList/>  
 }
 
-<IconGroup Icon1="shopping_cart" Icon2="search" onClick1={()=>{router.push("/Carts")}} onClick2={()=>{}}/>
+<IconGroup Icon1="shopping_cart" Icon2="search" onClick1={()=>{router.push("/Carts")}} Icon2Show={SearchShow} onClick2={()=>{router.push("/SearchPage")}}/>
 
 </div>
     )
 }
 function Search({className}:{className:string}):ReactNode{
+   const router = useRouter()
     return(
-        <div className={`self-center w-fit h-full flex ${className} `}>
+        <div className={`self-center w-fit h-full flex ${className} `} onClick={()=>router.push("/SearchPage")}>
 
 
         <span className="material-symbols-outlined cursor-pointer" style={{fontSize:"30px"}}>

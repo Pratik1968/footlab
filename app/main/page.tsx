@@ -28,7 +28,7 @@ router.replace("/SignUp")
     
 return(
 <div className="w-full h-full flex flex-col">
-    <Navigation/>
+    <Navigation SearchShow ={false}/>
 <Body/>
 </div>
 
