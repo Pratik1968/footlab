@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import Title from "../../_UtilComponent/title";
 import Card from "../../_UtilComponent/card";
-import ProductInfo from "../../UtilFunction/ProductInfo";
+import ProductInfo from "../../../UtilFunction/ProductInfo";
 
 export default function CustomProductGrid({title,subtitle,url,toId,fromId}:{title:string,subtitle:string,url:string,toId:number,fromId:number}):ReactNode{
     const [productInfo,setProductsInfo] = useState<ProductInfo[]>([])

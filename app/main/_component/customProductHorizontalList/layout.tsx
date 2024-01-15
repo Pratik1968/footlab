@@ -2,7 +2,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import Card from "../../_UtilComponent/card";
 import Title from "../../_UtilComponent/title";
-import ProductInfo from "../../UtilFunction/ProductInfo";
+import ProductInfo from "../../../UtilFunction/ProductInfo";
 import { title } from "process";
 
 export default function CustomProductHorizontalList({title,subtitle,url,toId,fromId}:{title:string,subtitle:string,url:string,fromId:number,toId:number}):ReactNode{

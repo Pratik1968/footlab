@@ -1,7 +1,7 @@
 "use client"
 import { useSearchParams } from "next/navigation"
 import { ReactNode, useEffect, useState } from "react"
-import ProductInfo from "../main/UtilFunction/ProductInfo"
+import ProductInfo from "../UtilFunction/ProductInfo"
 import Navigation from "../_component/navigation/layout"
 import Rating from "../_componentUtil/ratingComponent"
 import PageFooter from "../_component/footer/layout"

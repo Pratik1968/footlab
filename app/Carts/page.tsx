@@ -1,6 +1,6 @@
 "use client"
 import { ReactNode, useEffect, useState } from "react";
-import ProductInfo from "../main/UtilFunction/ProductInfo";
+import ProductInfo from "../UtilFunction/ProductInfo";
 import errorCode from "../Error/errorCode";
 import { X } from "lucide-react";
 import Navigation from "../_component/navigation/layout";
