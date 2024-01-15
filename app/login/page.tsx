@@ -28,7 +28,7 @@ export default function Login():ReactNode{
                 <Image className="absolute  hidden lg:block left-[20%] top-0" src={illustration3} alt="illustration3" height={250}/>
                 <Image className="absolute  hidden lg:block left-0 top-[25%]" src={illustration4} alt="illustration4" height={500}/>
             
-
+                <AdminText/>
         </div>
     )
 }
@@ -46,6 +46,7 @@ function SignUpContainer({signInButtonPressed,setSignInButtonPressed,password,em
 
       </div>
       <LoginText/>
+      
             </div>
     )
 }
@@ -122,4 +123,12 @@ let response = await    fetch("api/user_login",{
     }
     alert("Email not found")
 return
+}
+function AdminText():ReactNode{
+    const router = useRouter()
+    return(
+        <div className="w-full p-5 flex items-center  justify-center mt-4 fixed bottom-0 ">
+            <p className="text-[0.775rem] text-[#848484] font-normal ">Are you admin? <span className=" font-bold  cursor-pointer text-white" onClick={()=>router.push("/admin/login")} >Login</span></p>
+        </div>
+    )
 }
