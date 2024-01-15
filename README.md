@@ -77,6 +77,15 @@ Welcome to the Online Shoe Store project! This web application allows users to b
          productids JSONB
        );
        ```
+   - Run the following SQL script to create the `shoeorder` table:
+
+      ```sql
+      CREATE TABLE shoeorder (
+      email TEXT,
+     productids JSONB,
+     address TEXT,
+     status TEXT);
+      ```
 6. Set up the environment variables:
 
     Create a .env file in the root of the project.
