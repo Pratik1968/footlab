@@ -1,17 +1,15 @@
 "use client"
 import { ReactNode, useEffect, useState } from "react";
-import PersonSrc from "../assets/user.svg"
-import EmailSrc from "../assets/email.svg"
-import PasswordSrc from "../assets/password.svg"
+import PersonSrc from "../../assets/user.svg"
+import EmailSrc from "../../assets/email.svg"
+import PasswordSrc from "../../assets/password.svg"
 import Image from "next/image";
-import illustration1 from "../assets/girl-shopping-illustration.svg";
-import illustration2 from "../assets/ladding-waiting-illustration.svg";
-import illustration3 from "../assets/lady-choosing-illustration.svg";
-import illustration4 from "../assets/lady-shopping-online-illustration.svg";
-import { BrowserView } from "react-device-detect";
-import errorCode from "../Error/errorCode";
+import illustration1 from "../../assets/girl-shopping-illustration.svg";
+import illustration2 from "../../assets/ladding-waiting-illustration.svg";
+import illustration3 from "../../assets/lady-choosing-illustration.svg";
+import illustration4 from "../../assets/lady-shopping-online-illustration.svg";
 import { useRouter } from "next/navigation";
-import {cookies} from "next/headers";
+import { adminSession, setAdminSession } from "@/app/util/adminSession";
 export default function Login():ReactNode{
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("") 
@@ -28,7 +26,7 @@ export default function Login():ReactNode{
                 <Image className="absolute  hidden lg:block left-[20%] top-0" src={illustration3} alt="illustration3" height={250}/>
                 <Image className="absolute  hidden lg:block left-0 top-[25%]" src={illustration4} alt="illustration4" height={500}/>
             
-                <AdminText/>
+
         </div>
     )
 }
@@ -37,15 +35,13 @@ function SignUpContainer({signInButtonPressed,setSignInButtonPressed,password,em
     return(
         <div className="z-[2] self-center  bg-secondary h-fit   w-fit min-w-[290px] max-w-[401px]  md:w-[40%] lg:w-[25%] rounded-lg flex flex-col p-4 mx-20">
 
-<Title text="Login"/>
-<Discription text="Unleash exclusive collections, personalized recommendations, and early access to the best shoe deals."/>
+<Title text="Admin Login"/>
       <div className="w-full h-fit mt-9 flex flex-col gap-5 ">
           <InputBox setData={setEmail} type="email" icon={EmailSrc} alt="email" placeholder="Enter your email"/>
           <InputBox setData={setPassword} type="password" icon={PasswordSrc} alt="password" placeholder="Enter your password"/>
 <SignUpButton email={email} password={password}  signInButtonPressed={signInButtonPressed} setSignInButtonPressed={setSignInButtonPressed}/>
 
       </div>
-      <LoginText/>
       
             </div>
     )
@@ -57,13 +53,7 @@ function Title({text}:{text:string}):ReactNode{
         </div>
     )
 }
-function Discription({text}:{text:string}):ReactNode{
-   return(
-    <div className="mt-[1.31rem] flex text-center">
-        <p className="text-[#848484] text-[0.8rem] font-normal">{text}</p>
-    </div>
-   ) 
-}
+
 function InputBox({type,icon,alt,placeholder,setData}:{alt:string,type:string,icon:string,placeholder:string,setData:Function}):ReactNode{
     return(
         <div className="self-center w-[85%] h-fit flex items-center justify-center  border-2 border-[#848484] rounded-[0.3rem] py-3 pl-[0.88rem] gap-2">
@@ -77,7 +67,7 @@ function SignUpButton({signInButtonPressed,setSignInButtonPressed,email,password
   const router = useRouter()
     useEffect(()=>{
 if(signInButtonPressed===true){
-  router.push("/main")
+  router.push("/admin/dashboard")
 }
     },[signInButtonPressed])
     return(
@@ -86,21 +76,14 @@ if(signInButtonPressed===true){
         </div>
     )
 }
-function LoginText():ReactNode{
-    const router = useRouter()
-    return(
-        <div className="w-full flex items-center justify-center mt-4">
-            <p className="text-[0.775rem] text-[#848484] font-normal ">Don't have a account ? <span className=" font-bold text-black cursor-pointer" onClick={()=>router.push("/SignUp")} >Register</span></p>
-        </div>
-    )
-}
+
 async function SignUpMethod(setSignInButtonPressed:Function,email:string,password:string,){
 if(email ==="" || email===null ||password===""||password===null){
     alert("Please fill the information properly")
     return
 }
 
-let response = await    fetch("api/user_login",{
+let response = await    fetch("../api/admin_login",{
         method:"POST",
         mode:"cors",
         cache:"no-cache",
@@ -112,23 +95,11 @@ let response = await    fetch("api/user_login",{
 
     });
     let resJson = JSON.parse(await response.text())
-    if(await resJson.code =='200'){
-
-        
-
-        sessionStorage.setItem("name",resJson.name)
-        sessionStorage.setItem("email",email)
+    if(await resJson ==200){
+        setAdminSession(true)
         setSignInButtonPressed(true);
         return
     }
     alert("Email not found")
 return
-}
-function AdminText():ReactNode{
-    const router = useRouter()
-    return(
-        <div className="w-full p-5 flex items-center  justify-center mt-4 fixed bottom-0 ">
-            <p className="text-[0.775rem] text-[#848484] font-normal ">Are you admin? <span className=" font-bold  cursor-pointer text-white" onClick={()=>router.push("/admin/login")} >Login</span></p>
-        </div>
-    )
 }
