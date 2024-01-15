@@ -24,7 +24,9 @@ Welcome to the Online Shoe Store project! This web application allows users to b
 
 4. **Responsive Design:**
    - Enjoy a seamless experience on various devices, including desktops, tablets, and mobile phones.
-
+     
+5. **Admin Page:**
+   - View all the orders by the user.
 ## Installation
 
 1. Clone the repository:
@@ -96,7 +98,8 @@ Welcome to the Online Shoe Store project! This web application allows users to b
     DB_HOST=localhost
     DB_USER=myuser
     DB_PASSWORD=mypassword
-
+    ADMIN_EMAIL=admin_email
+    ADMIN_PASSWORD=admin_password
     ```
 7. Run the application:
     ```bash
