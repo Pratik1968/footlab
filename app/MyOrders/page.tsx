@@ -70,7 +70,7 @@ function OrderCards({ info, index, setProducts }: { info: cartInfo, index: numbe
     return (
 
         <div className="p-2 cursor-pointer lg:border lg:rounded lg:shadow" >
-            <div className="w-full grid  grid-cols-[1fr_2fr] gap-x-3 " >
+            <div className="w-full grid  grid-cols-[1fr_2fr] lg:grid-cols-[9.4rem_1fr] gap-x-3 " >
                 <div className="w-[9.4rem] h-[8rem] p-5 bg-card_background rounded-xl flex items-center justify-center" onClick={()=>router.push(`/ProductPage?productId=${info.productid}`)    }><img src={`/images/image_id=${info.productid}.png`} className="w-fit h-fit " alt={`${info.productid}`} /></div>
                 <div className="w-full flex-1 flex flex-col justify-center" onClick={()=>router.push(`/ProductPage?productId=${info.productid}`)    }>
                     <p className="font-medium">{info.name}</p>
