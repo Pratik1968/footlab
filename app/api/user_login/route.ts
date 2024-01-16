@@ -23,6 +23,7 @@ async  function DB(email:string,password:string){
     // conn.query("CREATE TABLE IF NOT EXIST users(id INTEGER AUTOINCREMENT PRIMARY KEY,email TEXT,password TEXT,name TEXT);");
    let query = `select * from users  where email ='${email}'  and password = '${password}';`;
    let responese =  await conn.query(query)
+   conn.end()
     return responese.rows
     
     }

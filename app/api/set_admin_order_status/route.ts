@@ -18,5 +18,6 @@ export async function POST(request: Request) {
 async function DB(id: string, selected: string) {
     const conn: Pool = db()
     let responese = await conn.query("update shoeorder set status = $1 where id =$2;", [selected, id])
+conn.end()
     return(responese.rowCount)
 }

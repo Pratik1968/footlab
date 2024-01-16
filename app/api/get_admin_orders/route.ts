@@ -19,6 +19,7 @@ export async function DB(){
         GROUP by id order by id
         ;
     `)
+    conn.end()
 return  response.rows
 }
 

@@ -30,6 +30,7 @@ async function DB(email:string,index:number){
   JOIN shoeproduct ON shoeproduct.productid = (element->> 'productId')::int  
   WHERE email='${email}';`
   const  Response:any=  await conn.query(query)
+  conn.end()
   return Response[1].rows
 
 }

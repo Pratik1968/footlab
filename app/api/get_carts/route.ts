@@ -26,6 +26,7 @@ async  function DB(email:string){
     WHERE email='${email}';                                                                                                                                                                     
    `;
    let responese =  await conn.query(query)
+   conn.end()
    return responese.rows
     
     }
