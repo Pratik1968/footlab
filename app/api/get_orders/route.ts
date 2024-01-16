@@ -24,6 +24,7 @@ async function DB(email: string) {
     let query = `
    SELECT   (element->>'size')::int AS size, (element->> 'productId')::int AS productid,shoeproduct.name as name,shoeproduct.price as price,status  FROM shoeorder, jsonb_path_query(productids, '$[*]') AS element JOIN shoeproduct ON shoeproduct.productid = (element->> 'productId')::int WHERE email='${email}';                                                                                                                                                                     `;
     let responese = await conn.query(query)
+    conn.end()
     return responese.rows
 
 }

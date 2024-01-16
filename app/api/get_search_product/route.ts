@@ -16,7 +16,7 @@ async function DB(text:string){
 const conn:Pool = db()
 text +="%"
 const result = await conn.query("select productid,name,price,productrating from shoeproduct where lower(name) like lower($1);",[text])
-
+conn.end()
 return result.rows
 
 }

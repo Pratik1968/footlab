@@ -29,7 +29,7 @@ for (const item in addresses){
     const deleteResult = await conn.query(` delete from carts where email ='${email}';`)
 
     await InsertIntoOrder(conn,email,productids,address)
-
+conn.end()
 }
 return "200"
 }
