@@ -26,7 +26,7 @@ fetch(url,{
     body:JSON.stringify({to:to,from:from}),
 }).then(res=>res.json()).then(res=>{setProductsInfo(res);}); 
         
-    },[])
+    },[true])
     return(
         <div className="lg:self-center w-full    h-fit flex flex-col  lg:flex-row  gap-5 ">
             {

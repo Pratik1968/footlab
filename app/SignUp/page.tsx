@@ -74,12 +74,12 @@ function InputBox({type,icon,alt,placeholder,setData}:{alt:string,type:string,ic
 }
 
 function SignUpButton({signInButtonPressed,setSignInButtonPressed,email,password,name}:{signInButtonPressed:boolean,setSignInButtonPressed:Function,email:string,password:string,name:string}):ReactNode{
-  const router = useRouter()
+    const router = useRouter()
     useEffect(()=>{
 if(signInButtonPressed===true){
   router.push("/main")
 }
-    },[signInButtonPressed])
+    },[signInButtonPressed,router])
     return(
         <div className="w-[80%] self-center h-fit flex items-center justify-center">
 <button onClick={()=>SignUpMethod(setSignInButtonPressed,email,password,name)} className=" w-full bg-primary text-secondary rounded-2xl  py-[0.8rem] text-[0.775rem] font-bold ">Sign Up</button>

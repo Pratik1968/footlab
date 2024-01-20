@@ -7,7 +7,7 @@ import Rating from "../_componentUtil/ratingComponent"
 import PageFooter from "../_component/footer/layout"
 import AlertBox from "../_component/alert/layout"
 import Link from "next/link"
-
+import Image from "next/image"
 export default function ProductPage():ReactNode{
     const [productInfo,setProductInfo] = useState<ProductInfo>()
 const [sizeActive,setSizeActive] = useState<number>(0)
@@ -18,7 +18,7 @@ let Sizes :string[]|undefined  = productInfo?.size
 useEffect(()=>{
 if(productId===null||productId==="") throw "Error : add productId"
 fetch(`api/get_product_info?productId=${productId}`).then(res=>res.json()).then(res=>{setProductInfo(res)})
-},[])
+},[true])
     return(
         <div className="h-full flex flex-col ">
  <Navigation CatergoriesListShow={false}/>
@@ -30,11 +30,12 @@ fetch(`api/get_product_info?productId=${productId}`).then(res=>res.json()).then(
 }
 
 function ProductPageContent({productInfo,sizeActive,alertBox,productId,setAlertBox,setSizeActive}:{productInfo?:ProductInfo,sizeActive:number,alertBox:boolean,productId:string|null,setSizeActive:Function,setAlertBox:Function}):ReactNode{
-    return(
-<div className="lg:w-[80%] lg:self-center    flex flex-col lg:flex-row mb-5">
+  return(
+<div className="lg:w-[80%] lg:self-center   grid grid-row-2 lg:grid-cols-2  lg:grid-rows-none mb-5">
 <div className=" flex flex-col ">
-    <ProductImage src={`/images/image_id=${productInfo?.productid}.png`}/>
-        <SmallProductImages src={[`/images/image_id=${productInfo?.productid}.png`]}/>
+    
+    <ProductImage src={productInfo?.productid}/>
+        <SmallProductImages  src={[`${productInfo?.productid}`]}/>
 </div>
 <div className="flex flex-col lg: gap-5">
     <Rating rating={productInfo?.productrating} RatingClassname="ml-[10%] mt-9 " Size="1.5rem"/>
@@ -56,25 +57,39 @@ function ProductPageContent({productInfo,sizeActive,alertBox,productId,setAlertB
 }
 
 
-function ProductImage({src}:{src:string}):ReactNode{
-    return(
-<img src={src} className="self-center w-[80%] mt-4"/>
+function ProductImage({src}:{src:number|undefined}):ReactNode{
+if (src !=undefined)
+return(
+<Image  width={300} height={300} alt={`${src}`}  src={`/images/image_id=${src}.png`} className="self-center w-[80%] mt-4"/>
 
     )
+    else return
 }
 function SmallProductImages({src}:{src:string[]}){
-return(
+    return(
     <div className="self-center w-[80%] flex mt-10 gap-3 ">
         {
             src.map((value,index)=>{
-                return(
-                    <div key={index} className="w-[25%] border-b-2 border-primary pb-2">
-<img src={value} />
-                        </div>
-                )
-            })
+                // TODO: undefined problem
+
+if(value!="undefined"){                return(
+                    <div key={index} className="w-[10%] border-b-2 border-primary pb-2">
+<Image width={0} height={0} className="w-full h-full" alt={value} src={`/images/image_id=${value}.png`} quality={100} unoptimized />
+                      </div>
+                )}
+           else{
+            return
+           } 
+            
+            }
+            
+            
+            )
+        
+        
         }
     </div>
+
 )
 
 }
@@ -89,15 +104,14 @@ function Discription({size=[],catergory="",brand="",name="",color="",price=0,qua
     return(
         <div className="self-center w-[80%] ">
             <p className="text-[#808080] text-xs">
-            Unleash your {catergory} potential with {brand}'s {name}  a vibrant {color} mesh masterpiece designed for peak performance. Priced at Rs {price}, available in sizes {size[0]}-{size[size.length-1]}, and boasting a solid stock quantity of {quantity}, this dynamic pair is set to hit the streets on {releaseDate.substring(0,10)}, with a promising product rating of {rating}.
+            Unleash your {catergory} potential with {brand}&apos;s {name}  a vibrant {color} mesh masterpiece designed for peak performance. Priced at Rs {price}, available in sizes {size[0]}-{size[size.length-1]}, and boasting a solid stock quantity of {quantity}, this dynamic pair is set to hit the streets on {releaseDate.substring(0,10)}, with a promising product rating of {rating}.
             </p>
         </div>
     )
 }
 function SizeComponent({sizeActive,setSizeActive,size=[]}:{sizeActive:number,setSizeActive:Function,size?:string[]}):ReactNode{
 
-    const SizeContainer  = ({IndividualSize,id}:{IndividualSize:number,id:number})=>{    //   console.log(`${id} ${sizeActive}`)
-    
+    const SizeContainer  = ({IndividualSize,id}:{IndividualSize:number,id:number})=>{    
     return(
 <div onClick={()=>setSizeActive(id)} className={`w-[1.875rem] h-[1.875rem] flex items-center justify-center rounded-full bg-[#D9D9D9] cursor-pointer ${(sizeActive===id)?"border-black border-2" :""} `}>
     <p  className={`${sizeActive===id?"font-bold":""}`} >{IndividualSize}</p>

@@ -108,6 +108,6 @@ async function fetchResult(text:string|undefined,setResult:Function){
         },
         body:JSON.stringify({text:text})
 
-    }).then(res=>res.json()).then(res=>{setResult(res);console.log(res)});
+    }).then(res=>res.json()).then(res=>{setResult(res);});
     
 }
