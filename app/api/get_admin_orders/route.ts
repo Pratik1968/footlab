@@ -2,12 +2,12 @@ import { Pool } from "pg"
 import db from "../_util/db"
 
 export async function GET(request:Request){
- const responese = await DB()
+ const responese = await databasefunction()
  
     return new Response(JSON.stringify(responese))
 } 
 
-export async function DB(){
+ async function databasefunction(){
     const conn: Pool = db()
     const response = await conn.query(`
     select id,email,address,status,json_agg(jsonb_build_object(

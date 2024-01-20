@@ -7,21 +7,17 @@ import CustomProductHorizontalList from "./_component/customProductHorizontalLis
 import  CustomProductGrid  from "./_component/customProductGrid/layout";
 import PageFooter from "../_component/footer/layout";
 
-export default function main():ReactNode{
-   let count =0 
+export default function Main():ReactNode{
    let router = useRouter()
 useEffect(()=>{
-    count++;
 
     let name = sessionStorage.getItem("name")
     let email = sessionStorage.getItem("email")
     
     if( name===""||name===null||email===""||email===null){
-        if(count==1){
 
             alert("Please Sign in to Account")
 router.replace("/SignUp")
-        }
     }
 },[])
 

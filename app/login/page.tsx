@@ -79,7 +79,7 @@ function SignUpButton({signInButtonPressed,setSignInButtonPressed,email,password
 if(signInButtonPressed===true){
   router.push("/main")
 }
-    },[signInButtonPressed])
+    },[signInButtonPressed,router])
     return(
         <div className="w-[80%] self-center h-fit flex items-center justify-center">
 <button onClick={()=>SignUpMethod(setSignInButtonPressed,email,password)} className=" w-full bg-primary text-secondary rounded-2xl  py-[0.8rem] text-[0.775rem] font-bold ">Sign Up</button>
@@ -90,7 +90,7 @@ function LoginText():ReactNode{
     const router = useRouter()
     return(
         <div className="w-full flex items-center justify-center mt-4">
-            <p className="text-[0.775rem] text-[#848484] font-normal ">Don't have a account ? <span className=" font-bold text-black cursor-pointer" onClick={()=>router.push("/SignUp")} >Register</span></p>
+            <p className="text-[0.775rem] text-[#848484] font-normal ">Don&apos;t have a account ? <span className=" font-bold text-black cursor-pointer" onClick={()=>router.push("/SignUp")} >Register</span></p>
         </div>
     )
 }

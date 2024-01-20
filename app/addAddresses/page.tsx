@@ -98,7 +98,7 @@ useEffect(()=>{
     if(changePage === true){
         router.replace("/main")
     }
-},[changePage])
+},[changePage,router])
 
     return(
 <div className="fixed bottom-5 left-0 right-0 flex items-center justify-center"><button className="w-[75%] lg:w-[15%] bg-primary py-4  text-secondary font-bold rounded-xl" onClick={()=>GoToPayment(addressContext?.addresses,getChangePageContext)}>Pay</button></div>

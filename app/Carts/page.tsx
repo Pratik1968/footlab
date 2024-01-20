@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import Navigation from "../_component/navigation/layout";
 import { time } from "console";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface cartInfo {
     size: number;
@@ -30,7 +31,7 @@ export default function Carts(): ReactNode {
 
         }).then(res => res.json()).then((res => { setProducts(res); }))
 
-    }, [])
+    }, [true])
     return (
         <div className="w-full h-full flex flex-col">
             <Navigation CatergoriesListShow={false} />
@@ -76,7 +77,7 @@ function CartCards({ info, index, setProducts }: { info: cartInfo, index: number
 
         <div className="p-2 cursor-pointer" >
             <div className="w-full grid grid-cols-[1fr_2fr_1fr] gap-x-3 my-2" >
-                <div className="w-[7.89rem] h-[6.7rem] p-5 bg-card_background rounded-xl flex items-center justify-center" onClick={()=>router.push(`/ProductPage?productId=${info.productid}`)    }><img src={`/images/image_id=${info.productid}.png`} className="w-fit h-fit " alt={`${info.productid}`} /></div>
+                <div className="w-[7.89rem] h-[6.7rem] p-5 bg-card_background rounded-xl flex items-center justify-center" onClick={()=>router.push(`/ProductPage?productId=${info.productid}`)    }><Image width={300} height={300} src={`/images/image_id=${info.productid}.png`} className="w-fit h-fit " alt={`${info.productid}`} /></div>
                 <div className="flex flex-col justify-center" onClick={()=>router.push(`/ProductPage?productId=${info.productid}`)    }>
                     <p className="font-medium">{info.name}</p>
                     <p><span className="font-medium">Size</span>: {info.size}</p>

@@ -6,34 +6,43 @@ import { ReactNode, useEffect, useLayoutEffect, useState } from "react";
 export default function Page():ReactNode{
   const [order,setOrder]= useState([])
   useLayoutEffect(()=>{
+    console.log(adminSession)
     if(!adminSession){
+        console.log("should not be here")
         redirect("/")
     }
-  },[])
+  })
+
   return(
 <div className="w-full h-fit flex flex-col pt-10 gap-5">
-<PageTitle/>
+<PageTitle setOrder = {setOrder}/>
 <Title value="Orders"/>
 <OrderList order={order} setOrder={setOrder}/>
 </div>
     )
 }
-function PageTitle():ReactNode{
+function PageTitle({setOrder}:{setOrder:Function}):ReactNode{
     const router = useRouter()   
+    const loadData = ()=>{
+        fetch("../api/get_admin_orders").then(res=>res.json()).then(res=>{setOrder(res);})
+
+    }
     return(
     
 
-           <div  role="button" className="w-full outline-[none] self-center  flex items-center  cursor-pointer">
-                            <span className="flex-1 material-symbols-outlined justify-self-end font-bold cursor-pointer pl-3" onClick={()=>{setAdminSession(false);router.replace("/login")}} >
+           <div  role="button" className="w-full outline-[none] self-center  grid grid-cols-[1fr_6fr_1fr] items-center  cursor-pointer">
+                            <span className="flex-1 material-symbols-outlined justify-self-end font-bold cursor-pointer pl-3" onClick={()=>{setAdminSession(false);router.replace("/login");console.log("from log out button")}} >
 logout
 </span>
         
            <div className="flex-1 self-center flex items-center justify-center">
                <p  className="text-4xl font-extrabold">Footlab</p>
            </div>
- <div className="flex-1">
-
- </div>
+           <div  role="button" className="w-full outline-[none] self-center  flex items-center  cursor-pointer" onClick={()=>loadData()}>
+                            <span className="flex-1 material-symbols-outlined justify-self-end font-bold cursor-pointer pl-3"  >
+restart_alt
+</span>
+</div>
            </div>
     
     )
@@ -46,13 +55,13 @@ logout
     function OrderList({order,setOrder}:{order:any,setOrder:Function}):ReactNode{
         useEffect(()=>{
             fetch("../api/get_admin_orders").then(res=>res.json()).then(res=>{setOrder(res);})
-        },[])
+        },[true])
         return(
             <div className="w-full h-full flex flex-col">
 {
     order.map((value:any,index:any)=>{
 return <Card key={index} value={value}/>
-    })
+    },[true])
 }
             </div>
         )

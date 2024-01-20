@@ -69,7 +69,7 @@ function SignUpButton({signInButtonPressed,setSignInButtonPressed,email,password
 if(signInButtonPressed===true){
   router.push("/admin/dashboard")
 }
-    },[signInButtonPressed])
+    },[signInButtonPressed,router])
     return(
         <div className="w-[80%] self-center h-fit flex items-center justify-center">
 <button onClick={()=>SignUpMethod(setSignInButtonPressed,email,password)} className=" w-full bg-primary text-secondary rounded-2xl  py-[0.8rem] text-[0.775rem] font-bold ">Sign Up</button>

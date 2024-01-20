@@ -19,7 +19,7 @@ fetch(url,{
     },
     body:JSON.stringify({to:toId,from:fromId}),
 }).then(res=>res.json()).then(res=>{setProducts(res)});
-},[ ])
+},[true])
     return(
         <div className="w-full lg:w-[80%] lg:self-center h-fit">
 <Title title={title} subtitle={subtitle}/>
